@@ -202,5 +202,29 @@
             data-agent-version="6"
             data-title="Only Love Virtual Assistant">
     </script>
+
+    <!-- Auto-Open Chat Widget -->
+    <script>
+        // Wait for page to load completely
+        window.addEventListener('load', function() {
+            // Give the Retell widget time to initialize
+            setTimeout(function() {
+                // Try to find and click the chat widget
+                const chatButton = document.querySelector('[id*="retell"], [class*="retell"], [class*="chat"], button[title*="chat" i], div[role="button"]');
+                
+                if (chatButton) {
+                    console.log('Found chat widget, clicking...');
+                    chatButton.click();
+                } else {
+                    console.log('Chat widget not found, trying alternative selectors...');
+                    // Try backup selectors
+                    const fallbackButton = document.querySelector('button, [role="button"], .widget, #widget');
+                    if (fallbackButton && fallbackButton.offsetParent) {
+                        fallbackButton.click();
+                    }
+                }
+            }, 3000); // Wait 3 seconds for widget to load
+        });
+    </script>
 </body>
 </html>
